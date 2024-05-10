@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Chart } from 'chart.js/auto';
 import axios from 'axios';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
 import '../styles/AdminStatistic.css';
 
 const AdminStatistic = () => {
@@ -129,6 +131,29 @@ const AdminStatistic = () => {
     }
   };
 
+  const downloadReport = () => {
+    const pdf = new jsPDF();
+
+    // Add chart visuals to the PDF
+    const chartCanvas = chartRef.current;
+    const barChartCanvas = barChartRef.current;
+
+    pdf.text("Advertisement Statistics", 10, 10);
+    pdf.addImage(chartCanvas.toDataURL('image/png'), 'PNG', 10, 20, 100, 100); // Add pie chart
+    pdf.addImage(barChartCanvas.toDataURL('image/png'), 'PNG', 10, 130, 100, 100); // Add bar chart
+
+    // Add statistics text
+    pdf.text(`Approved Advertisements: ${statistics.approved}`, 10, 240);
+    pdf.text(`Rejected Advertisements: ${statistics.rejected}`, 10, 250);
+    pdf.text(`Pending Advertisements: ${statistics.pending}`, 10, 260);
+    pdf.text(`Paid Advertisements: ${statistics.paid}`, 10, 270);
+    pdf.text(`Each Paid ad costs per week: $50`, 10, 280);
+    pdf.text(`Total Paid Amount: $${statistics.totalPaidAmount}`, 10, 290);
+
+    // Save the PDF
+    pdf.save("advertisement_statistics.pdf");
+  };
+
   return (
     <div className="container9">
       <div className="statistics">
@@ -146,7 +171,7 @@ const AdminStatistic = () => {
       <div>
         <canvas id="barChartCanvas" ref={barChartRef}></canvas>
       </div>
-
+      <button className="download-button" onClick={downloadReport}>Download Report</button>
     </div>
   );
 };
