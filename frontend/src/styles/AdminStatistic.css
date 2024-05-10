@@ -1,0 +1,32 @@
+/* AdminStatistic.css */
+
+.container9 {
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-image: url('../images/img07.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.statistics {
+    margin-top: 20px;
+    border: 1px solid #f8f8f8;
+    border-radius: 5px;
+    padding: 20px;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.statistics h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.statistics p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Add more styles as needed */
