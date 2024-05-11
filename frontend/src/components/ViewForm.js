@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
+import "./Css/View.css"; 
 
 const ViewForm = () => {
     const [cabs, setCabs] = useState([]);
@@ -57,27 +58,19 @@ const ViewForm = () => {
     };
 
     return (
-        <div className="container" style={{ marginTop: '100px'}}> 
-            <div style={{ width: '90%' }}>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Search by package name"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        style={{ 
-                            border: '2px solid #ccc',
-                            borderRadius: '5px',
-                            padding: '10px',
-                            width: '100%',
-                            boxSizing: 'border-box',
-                            fontSize: '16px',
-                            marginBottom: '10px'
-                        }}
-                    />
-                </div>
-    
-                <table style={{ width: '100%' }}>
+        <main className="table"> 
+            <div className="table__header">
+                <h3>Package Details</h3>
+                <input
+                    type="text"
+                    placeholder="Search by package name"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
+
+            <div className="table__body">
+                <table>
                     <thead>
                         <tr>
                             <th>Package Name</th>
@@ -101,10 +94,8 @@ const ViewForm = () => {
                         ))}
                     </tbody>
                 </table>
-
-                
             </div>
-        </div>
+        </main>
     );
 };
 

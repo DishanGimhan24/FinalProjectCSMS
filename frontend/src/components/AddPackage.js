@@ -1,95 +1,110 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './AddPackage.css';
+import './Css/Add.css';
 
 
-export default function AddPackage(){
 
-const[packageName,setpackageName] = useState("");
-const[description,setdescription] = useState("");
-const[price,setprice] = useState("");
-const[timePeriod,settimePeriod] = useState("");
-const [showModal, setShowModal] = useState(false);
+export default function AddPackage() {
+    const [packageName, setPackageName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [timePeriod, setTimePeriod] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [priceError, setPriceError] = useState("");
+    const [durationError, setDurationError] = useState("");
 
-function sendData(e){
-  e.preventDefault();
-  
-  const newPackage ={
+    function sendData(e) {
+        e.preventDefault();
 
-    packageName,
-    description,
-    price,
-    timePeriod
-       
-  }
+        const newPackage = {
+            packageName,
+            description,
+            price,
+            timePeriod
+        };
 
-  axios.post("http://localhost:8070/cab/add",newPackage).
-  then(()=>{
-    setShowModal(true);
-            // Reset form fields after successful submission
-            setpackageName("");
-            setdescription("");
-            setprice("");
-            settimePeriod("");
+        axios.post("http://localhost:8070/cab/add", newPackage)
+            .then(() => {
+                setShowModal(true);
+                setPackageName("");
+                setDescription("");
+                setPrice("");
+                setTimePeriod("");
+                setPriceError("");
+                setDurationError("");
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    }
 
-  }).catch((err)=>{
-    alert(err);
-  })
- 
-}
+    return (
+        <div className="container" style={{ marginTop: '30px' }}>
+            <h2 className="form-title">Add Package</h2>
+            <form onSubmit={sendData}>
+                <div className="user-input-box">
+                    <label htmlFor="packageName" className="form-label">Package Name</label>
+                    <input type="text" className="form-control" id="packageName" placeholder='Enter Package name'
+                        value={packageName}
+                        onChange={(e) => setPackageName(e.target.value)}
+                    />
+                </div>
+                <div className="user-input-box">
+                    <label htmlFor="description" className="form-label">Description</label>
+                    <input type="text" className="form-control" id="description" placeholder='Enter Package Description'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div className="user-input-box">
+                    <label htmlFor="price" className="form-label">Price</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="price"
+                        placeholder='Enter Package price'
+                        value={price}
+                        onChange={(e) => {
+                            const inputPrice = parseFloat(e.target.value);
 
+                            if (!isNaN(inputPrice) && inputPrice > 0) {
+                                setPrice(inputPrice);
+                                setPriceError('');
+                            } else {
+                                setPrice('');
+                                setPriceError('Please enter a valid positive number');
+                            }
+                        }}
+                    />
+                    {priceError && <p style={{ color: 'red' }}>{priceError}</p>}
+                </div>
 
-    return(
+                <div className="user-input-box">
+                    <label htmlFor="timePeriod" className="form-label">Duration</label>
+                    <input type="text" className="form-control" id="timePeriod" placeholder='Enter Package Duration'
+                        value={timePeriod}
+                        onChange={(e) => {
+                            const inputDuration = parseFloat(e.target.value);
 
-        <div className="container">
-     
-<form onSubmit={sendData}>
-  <div class="mb-1">
-    <label for="pckageName" class="form-label">Package Name</label>
-    <input type="text" class="form-control" id="pckageName" placeholder='Enter Package name'
-    onChange={(e)=>{
+                            if (!isNaN(inputDuration) && inputDuration > 0) {
+                                setTimePeriod(inputDuration);
+                                setDurationError('');
+                            } else {
+                                setTimePeriod('');
+                                setDurationError('Please enter a valid positive number');
+                            }
+                        }}
+                    />
+                    {durationError && <p style={{ color: 'red' }}>{durationError}</p>}
+                </div>
 
-      setpackageName(e.target.value);
-
-    }}/>
-
-  </div>
-  <div class="mb-2">
-    <label for="Description" class="form-label">Description</label>
-    <input type="text" class="form-control" id="description" placeholder='Enter Package escription'
-    onChange={(e)=>{
-
-      setdescription(e.target.value);
-
-    }}/>
-
-  </div>
-  <div class="mb-3">
-    <label for="Price" class="form-label">Price</label>
-    <input type="text" class="form-control" id="price" placeholder='Enter Package price'
-    onChange={(e)=>{
-
-      setprice(e.target.value);
-
-    }}/>
-
-  </div>
-  <div class="mb-4">
-    <label for="Duration" class="form-label">Duration</label>
-    <input type="text" class="form-control" id="timePeriod" placeholder='Enter Package Duration'
-    onChange={(e)=>{
-
-      settimePeriod(e.target.value);
-
-    }}/>
-
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<Modal show={showModal} onHide={() => setShowModal(false)}>
+                <div className="form-submit-btn">
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Package Added</Modal.Title>
                 </Modal.Header>
@@ -100,9 +115,6 @@ function sendData(e){
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-</div>
-
-    )
-
+        </div>
+    );
 }
