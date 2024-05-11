@@ -13,11 +13,20 @@ const path = require("path");
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(express.json());
+const uploadRoute = require("./routes/uploadRoute.js")
+
+//======================================
+const dateRouter = require('./routes/dateRouter.js');
+
 
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/uploads", express.static("uploads"));
+
+//================================
+app.use('/dates', dateRouter);
 
 const URL = process.env.MONGODB_URL;
 
@@ -71,8 +80,15 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const CustomerRouter =require("./routes/Customers.js") 
 app.use("/Customer",CustomerRouter)
 
+const cabRouter = require("./routes/cab.js");
+
+
+app.use("/cab",cabRouter);
+app.use("/uploads", uploadRoute);
 
 app.listen(PORT, () => {
 
     console.log(`Server is up and running on port number : ${PORT}`)
 })
+
+

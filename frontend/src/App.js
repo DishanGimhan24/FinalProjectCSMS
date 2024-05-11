@@ -23,6 +23,19 @@ import Navbar from "./components/Navbar";
 import Aboutus from "./components/Aboutus";
 import RealHome from "./components/realhome.js";
 
+
+//dishan
+import AddPackage from './components/AddPackage';
+import CabEditForm from './components/UpdatePackage/CabEditForm';
+import CabTable from './components/UpdatePackage/CabTable';
+// import Header from './components/Header';
+import ViewForm from './components/ViewForm';
+import PackageCounts from './components/PackageCounts';
+import UploadedImagesPage from './components/UploadedImagesPage';
+import UploadForm from './components/UploadForm';
+import ImageGallery from './components/ImageGallery';
+
+
 function App() {
   return (
     <Router>
@@ -49,6 +62,17 @@ function App() {
               <Route path="/Navbar" element={<Navbar />} />
               <Route path="/Aboutus" element={<Aboutus />} />
               <Route path="/RealHome" element={<RealHome />} />
+
+              {/* dishan */}
+              <Route path="/package/add" element={<AddPackage />} />
+              <Route path="/package/home" element={<CabTable />} />
+              <Route path="/package/edit/:id" element={<CabEditForm />} />
+              <Route path="/package/delete/:id" element={<CabEditForm />} />
+              <Route path="/package/view" element={<ViewForm />} />
+              <Route path="/package/select" element={<PackageCounts/>} />
+              <Route path="/package/uploaded-images" element={<UploadedImagesPage/>} />
+              <Route path="/package/form" element={<UploadForm/>} />
+              <Route path="/package/uploads" element={<ImageGallery/>} />
 
           </Routes>
         </div>
