@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './AddPackage.css';
+import './Css/Add.css';
+
+
 
 export default function AddPackage() {
     const [packageName, setPackageName] = useState("");
@@ -39,23 +41,24 @@ export default function AddPackage() {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: '30px' }}>
+            <h2 className="form-title">Add Package</h2>
             <form onSubmit={sendData}>
-                <div className="mb-1">
+                <div className="user-input-box">
                     <label htmlFor="packageName" className="form-label">Package Name</label>
                     <input type="text" className="form-control" id="packageName" placeholder='Enter Package name'
                         value={packageName}
                         onChange={(e) => setPackageName(e.target.value)}
                     />
                 </div>
-                <div className="mb-2">
+                <div className="user-input-box">
                     <label htmlFor="description" className="form-label">Description</label>
                     <input type="text" className="form-control" id="description" placeholder='Enter Package Description'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="user-input-box">
                     <label htmlFor="price" className="form-label">Price</label>
                     <input
                         type="text"
@@ -78,7 +81,7 @@ export default function AddPackage() {
                     {priceError && <p style={{ color: 'red' }}>{priceError}</p>}
                 </div>
 
-                <div className="mb-4">
+                <div className="user-input-box">
                     <label htmlFor="timePeriod" className="form-label">Duration</label>
                     <input type="text" className="form-control" id="timePeriod" placeholder='Enter Package Duration'
                         value={timePeriod}
@@ -97,7 +100,9 @@ export default function AddPackage() {
                     {durationError && <p style={{ color: 'red' }}>{durationError}</p>}
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <div className="form-submit-btn">
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
             </form>
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>

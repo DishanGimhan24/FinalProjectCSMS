@@ -1,0 +1,24 @@
+
+.nav-container {
+    background: linear-gradient(to bottom right, #060a32, #0a0b29); /* Gradient background */
+    padding: 10px; /* Add some padding to the container */
+    height: 75px; /* Increase the height of the container */
+    display: flex; /* Use flexbox */
+    justify-content: flex-start; /* Align items to the start of the container */
+    align-items: center; /* Center the items vertically */
+  }
+  
+  .nav-pills .nav-link {
+    color: white; /* Text color */
+    font-size: 17px; /* Decrease font size */
+    transition: color 0.3s, background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transitions */
+    margin: 0 10px; /* Add margin to create space between menu items */
+  }
+  
+  .nav-pills .nav-link:hover {
+    color: lightblue; /* Change text color on hover */
+    background-color: #002366; /* Change background color on hover */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+    transform: scale(1.05); /* Scale up slightly on hover */
+  }
+  

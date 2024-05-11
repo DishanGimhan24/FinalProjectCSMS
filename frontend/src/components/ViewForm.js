@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
+import "./Css/View.css"; 
 
 const ViewForm = () => {
     const [cabs, setCabs] = useState([]);
@@ -56,28 +57,21 @@ const ViewForm = () => {
         }
     };
 
+
     return (
-        <div className="container" style={{ marginTop: '100px'}}> 
-            <div style={{ width: '90%' }}>
-                <div>
+        <div className="main-container">
+            <main className="table"> 
+                <h2 className="title">Package Details</h2>
+                <div className="table__header">
                     <input
                         type="text"
                         placeholder="Search by package name"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        style={{ 
-                            border: '2px solid #ccc',
-                            borderRadius: '5px',
-                            padding: '10px',
-                            width: '100%',
-                            boxSizing: 'border-box',
-                            fontSize: '16px',
-                            marginBottom: '10px'
-                        }}
                     />
                 </div>
-    
-                <table style={{ width: '100%' }}>
+                <div className="table__body">
+                    <table>
                     <thead>
                         <tr>
                             <th>Package Name</th>
@@ -95,17 +89,22 @@ const ViewForm = () => {
                                 <td>{cab.price}</td>
                                 <td>{cab.timePeriod}</td>
                                 <td>
-                                    <button onClick={() => handlePackageSelection(cab.packageName)}>Select</button>
+                                <div className="submit-btn">
+                                    <button type="submit" className="btn btn-primary"onClick={() => handlePackageSelection(cab.packageName)}>Select</button>
+                                </div>
+        
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table>
-
-                
-            </div>
+                    </table>
+                </div>
+            </main>
         </div>
     );
+    
+
+
 };
 
 export default ViewForm;
