@@ -1,39 +1,40 @@
-const mongoose = require('mongoose');
-const Schema =mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const CustomerSchema =new Schema({
+const CustomerSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  drivingExperience: {
+    type: String,
+    required: false,
+  },
+  licenseYear: {
+    type: Number,
+    required: false,
+  },
+  profileImage: { // Profile image filename
+    type: String,
+    required: false,
+  },
+});
 
-    name :{
-        type :String,
-        required: true
-    },
-    age:{
-        type: Number,
-        required:true
-    },
-    address:{
-        type: String,
-        required:true
-    },
-    Password:{
-        type:String,
-        required:true
-    },
-    
-    type:{
-        type: String,
-        required:true
-    },
-    drivingExperiance:{
-        type:String,
-        required:false
-    },
-    liscenceYear:{
-        type:Number,
-        required:false
-    }
-
-
-})
-const Customer = mongoose.model("Customer",CustomerSchema);
-module.exports=Customer;
+const Customer = mongoose.model("Customer", CustomerSchema);
+module.exports = Customer;

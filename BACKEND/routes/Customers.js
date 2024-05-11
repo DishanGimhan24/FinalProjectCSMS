@@ -1,25 +1,43 @@
 const router = require("express").Router();
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 let Customer = require("../models/Customer");
 
-//localhost:8070/customer/add
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/profile"); // Save profile images to uploads/profile folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+const upload = multer({ storage: storage });
 
-http: router.route("/add").post((req, res) => {
-  const age = Number(req.body.age);
-  const name = req.body.name;
-  const type = req.body.type;
-  const address = req.body.address;
-  const Password = req.body.Password; // Updated variable name
-  const drivingExperiance = req.body.drivingExperiance; // Updated variable name
-  const liscenceYear = req.body.liscenceYear; // Updated variable name
-
-  const newCustomer = new Customer({
+// Route for adding a new customer
+router.route("/add").post(upload.single("profileImage"), (req, res) => {
+  const {
     name,
     age,
     type,
     address,
-    Password,
-    drivingExperiance,
-    liscenceYear,
+    password,
+    drivingExperience,
+    licenseYear,
+  } = req.body;
+
+  const profileImage = req.file ? req.file.filename : ""; // Get uploaded profile image filename
+
+  const newCustomer = new Customer({
+    name,
+    age: Number(age),
+    type,
+    address,
+    password,
+    drivingExperience,
+    licenseYear,
+    profileImage, // Save profile image filename
   });
 
   newCustomer
@@ -29,8 +47,12 @@ http: router.route("/add").post((req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send("Error adding customer");
     });
 });
+
+// Other routes and code...
+
 
 router.route("/").get((req, res) => {
   Customer.find()
