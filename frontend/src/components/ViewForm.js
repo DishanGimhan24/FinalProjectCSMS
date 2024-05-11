@@ -61,7 +61,7 @@ const ViewForm = () => {
     return (
         <div className="main-container">
             <main className="table"> 
-                <h2 className="title">Package Details</h2>
+                <h2 className="title">View Packages</h2>
                 <div className="table__header">
                     <input
                         type="text"
