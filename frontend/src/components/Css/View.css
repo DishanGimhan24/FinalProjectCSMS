@@ -1,9 +1,9 @@
 .main-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items to the top */
-    height: 100vh; /* Adjust as needed */
-    padding-top: 30px; /* Add some top padding */
+    align-items: flex-start; 
+    height: 100vh; 
+    padding-top: 30px; 
 }
 
 .table {
