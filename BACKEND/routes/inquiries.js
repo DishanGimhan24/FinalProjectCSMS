@@ -26,22 +26,25 @@ router.route("/ginq").get((req, res) => {
         .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-// Route to update inquiry details
+// Route to update inquiry details including email
 router.route("/update/:id").put(async (req, res) => {
-    const { inquirycategory, inquiryprioritization, personemail, personum, personinquiry } = req.body;
+    const { personemail } = req.body;
     const inquiryId = req.params.id;
 
     try {
-        await inquiryModel.findByIdAndUpdate(inquiryId, {
-            inquirycategory,
-            inquiryprioritization,
-            personemail,
-            personum,
-            personinquiry
-        });
-        res.json({ status: "Inquiry updated" });
+        // Ensure the request body contains the email field
+        if (!personemail) {
+            return res.status(400).json({ error: "Email address is required for update" });
+        }
+
+        // Update the email address
+        await inquiryModel.findByIdAndUpdate(inquiryId, { personemail });
+
+        // Fetch and return the updated inquiry
+        const updatedInquiry = await inquiryModel.findById(inquiryId);
+        res.json({ status: "Inquiry updated", inquiry: updatedInquiry });
     } catch (err) {
-        res.status(400).json(`Error: ${err}`);
+        res.status(400).json({ error: `Error: ${err}` });
     }
 });
 
@@ -53,7 +56,7 @@ router.route("/delete/:id").delete(async (req, res) => {
         await inquiryModel.findByIdAndDelete(inquiryId);
         res.json({ status: "Inquiry deleted" });
     } catch (err) {
-        res.status(400).json(`Error: ${err}`);
+        res.status(400).json({ error: `Error: ${err}` });
     }
 });
 
@@ -66,7 +69,7 @@ router.route("/updateStatus/:id").put(async (req, res) => {
         await inquiryModel.findByIdAndUpdate(inquiryId, { status });
         res.json({ status: "Inquiry status updated" });
     } catch (err) {
-        res.status(400).json(`Error: ${err}`);
+        res.status(400).json({ error: `Error: ${err}` });
     }
 });
 
@@ -93,7 +96,7 @@ router.route("/addReply/:id").post(async (req, res) => {
         await inquiry.save();
         res.json({ status: "Reply added to inquiry" });
     } catch (err) {
-        res.status(400).json(`Error: ${err}`);
+        res.status(400).json({ error: `Error: ${err}` });
     }
 });
 
@@ -113,7 +116,6 @@ router.route("/:id").get(async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-
 
 router.get("/categoryTypeCounts", async (req, res) => {
     try {
