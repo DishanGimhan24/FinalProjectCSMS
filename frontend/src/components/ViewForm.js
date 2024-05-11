@@ -57,20 +57,21 @@ const ViewForm = () => {
         }
     };
 
-    return (
-        <main className="table"> 
-            <div className="table__header">
-                <h3>Package Details</h3>
-                <input
-                    type="text"
-                    placeholder="Search by package name"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-            </div>
 
-            <div className="table__body">
-                <table>
+    return (
+        <div className="main-container">
+            <main className="table"> 
+                <h2 className="title">Package Details</h2>
+                <div className="table__header">
+                    <input
+                        type="text"
+                        placeholder="Search by package name"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+                <div className="table__body">
+                    <table>
                     <thead>
                         <tr>
                             <th>Package Name</th>
@@ -88,15 +89,22 @@ const ViewForm = () => {
                                 <td>{cab.price}</td>
                                 <td>{cab.timePeriod}</td>
                                 <td>
-                                    <button onClick={() => handlePackageSelection(cab.packageName)}>Select</button>
+                                <div className="submit-btn">
+                                    <button type="submit" className="btn btn-primary"onClick={() => handlePackageSelection(cab.packageName)}>Select</button>
+                                </div>
+        
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table>
-            </div>
-        </main>
+                    </table>
+                </div>
+            </main>
+        </div>
     );
+    
+
+
 };
 
 export default ViewForm;
