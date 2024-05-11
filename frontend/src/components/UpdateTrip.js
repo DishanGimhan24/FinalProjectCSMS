@@ -26,8 +26,8 @@ function UpdateTrip() {
         if (location.state) {
           tripData = location.state; 
         } else {
-          const response = await Axios.get(http://localhost:8070/trip/get/${id});
-          tripData = response.data.trip;
+          const response = await Axios.get(`http://localhost:8070/trip/get/${id}`);
+          tripData = response.data.trip
         }
         setValues(prevValues => ({
           ...prevValues,
@@ -54,7 +54,7 @@ function UpdateTrip() {
 
 const handleUpdate=async()=>{
   try{
-    await Axios.put(http://localhost:8070/trip/update/${id}, values);
+    await Axios.put(`http://localhost:8070/trip/update/${id}`, values);
     window.location.href='/';
   }catch(error){
     console.log(error)

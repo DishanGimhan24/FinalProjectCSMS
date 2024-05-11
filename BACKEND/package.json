@@ -128,7 +128,7 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "backend": "node backend/server.js",
-    "dev": "concurrently \"npm run server\" \"npm run backend\""
+    "dev": "node server.js"
   },
   "author": "bhawi",
   "license": "ISC"

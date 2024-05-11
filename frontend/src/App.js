@@ -49,7 +49,7 @@ import AddDriversPayments from './components/AddDriversPayments';
 import PaymentManagerHome from './components/PaymentManagerHome';
 import Reports from './components/Reports';
 import AllDriverPayments from './components/AllDriverPayments';
-import UDcuspayments from './components/UDcuspayments';\
+import UDcuspayments from './components/UDcuspayments';
 
 //triporder
 import AddTrip from './components/AddTrip';
