@@ -11,7 +11,7 @@
   .user-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 400px;
   }
   
   /* Style table headers */
@@ -42,7 +42,7 @@
     display: block;
     margin: 0 auto;
     max-width: 150px;
-    margin-bottom: 20px;
+    margin-top: 200px;
   }
   .center-container {
     display: flex;
@@ -55,6 +55,7 @@
     padding: 10px;
     background-color: #f0f0f0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 200px;
   }
   
   .search-input {
@@ -73,5 +74,16 @@
   .user-list {
     width: 100%;
     margin-top: 20px; /* Adjust margin as needed */
+  }
+  .statistics-container {
+    display: flex;
+    gap: 50px; /* Horizontal gap between child containers */
+    margin-top: 20px;
+    background-color: tan;
+  }
+  
+  .age-stats,
+  .user-stats {
+    margin-bottom: 20px;
   }
   
