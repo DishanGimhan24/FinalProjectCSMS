@@ -33,6 +33,14 @@ const AddInventory = () => {
         }
     };
 
+    // Ensure price is non-negative
+    const handlePriceChange = (e) => {
+        const newPrice = parseFloat(e.target.value);
+        if (!isNaN(newPrice) && newPrice >= 0) {
+            setPrice(newPrice);
+        }
+    };
+
     return (
         <div style={containerStyle}>
             <h2 style={titleStyle}>Add Inventory Item</h2>
@@ -47,7 +55,7 @@ const AddInventory = () => {
                 <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} style={inputStyle} required />
                 
                 <label style={labelStyle}>Price:</label>
-                <input type="number" value={price} onChange={(e) => setPrice(parseFloat(e.target.value))} style={inputStyle} required />
+                <input type="number" value={price} onChange={handlePriceChange} style={inputStyle} required />
                 
                 <button type="submit" style={buttonStyle}>Add Item</button>
             </form>
@@ -65,44 +73,42 @@ const containerStyle = {
     backgroundColor: '#fff',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
     marginBottom: '20px', // Adjust the value as needed
-  };
-  
+};
 
 const titleStyle = {
-  fontSize: '1.5rem',
-  marginBottom: '20px',
-  color: '#333',
-  textAlign: 'center',
-  paddingRight: '150px',
-
+    fontSize: '1.5rem',
+    marginBottom: '20px',
+    color: '#333',
+    textAlign: 'center',
+    paddingRight: '150px',
 };
 
 const labelStyle = {
-  fontWeight: 'bold',
-  marginBottom: '8px',
-  color: '#555',
+    fontWeight: 'bold',
+    marginBottom: '8px',
+    color: '#555',
 };
 
 const inputStyle = {
-  padding: '10px',
-  marginBottom: '15px',
-  borderRadius: '5px',
-  border: '1px solid #ccc',
-  width: '100%',
-  fontSize: '1rem',
+    padding: '10px',
+    marginBottom: '15px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    width: '100%',
+    fontSize: '1rem',
 };
 
 const buttonStyle = {
-  padding: '12px',
-  backgroundColor: '#007bff',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  width: '100%',
-  fontSize: '1rem',
-  marginTop: '20px',
-  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+    padding: '12px',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    width: '100%',
+    fontSize: '1rem',
+    marginTop: '20px',
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
 };
 
 export default AddInventory;
