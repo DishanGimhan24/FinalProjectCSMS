@@ -19,7 +19,7 @@ const Cart = () => {
     const fetchMaxQuantities = async () => {
       const maxQuantitiesData = await Promise.all(
         cartItems.map(async (item) => {
-          const response = await fetch(`http://localhost:8091/inventory/maxQuantity/${item.id}`);
+          const response = await fetch(`http://localhost:8070/inventory/maxQuantity/${item.id}`);
           const data = await response.json();
           return { itemId: item.id, maxQuantity: data.maxQuantity };
         })

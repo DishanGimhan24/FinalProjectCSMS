@@ -17,7 +17,7 @@ export default function AddInventory() {
     }, []);
 
     const fetchInventory = () => {
-        axios.get('http://localhost:8091/inventory/list')
+        axios.get('http://localhost:8070/inventory/list')
             .then(res => {
                 setInventory(res.data);
             })
@@ -37,7 +37,7 @@ export default function AddInventory() {
 
     const handleDelete = (itemId) => {
         if (window.confirm("Are you sure you want to delete this item?")) {
-            axios.delete(`http://localhost:8091/inventory/delete/${itemId}`)
+            axios.delete(`http://localhost:8070/inventory/delete/${itemId}`)
                 .then(res => {
                     console.log(res.data);
                     alert('Item deleted successfully!');
@@ -56,7 +56,7 @@ export default function AddInventory() {
         const newItem = { itemName, quantity, category, price };
 
         if (editingItemId) {
-            axios.put(`http://localhost:8091/inventory/update/${editingItemId}`, newItem)
+            axios.put(`http://localhost:8070/inventory/update/${editingItemId}`, newItem)
                 .then(res => {
                     console.log(res.data);
                     alert('Item updated successfully!');
@@ -67,7 +67,7 @@ export default function AddInventory() {
                     alert('Failed to update item. Please try again.');
                 });
         } else {
-            axios.post('http://localhost:8091/inventory/add', newItem)
+            axios.post('http://localhost:8070/inventory/add', newItem)
                 .then(res => {
                     console.log(res.data);
                     alert('Item added successfully!');

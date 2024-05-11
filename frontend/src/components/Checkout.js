@@ -23,7 +23,7 @@ const Checkout = () => {
 
     try {
       const newCheckout = { email, phone, paymentNumber, cartItems, cartTotal };
-      await axios.post('http://localhost:8091/checkout/add', newCheckout);
+      await axios.post('http://localhost:8070/checkout/add', newCheckout);
       alert('Checkout successful!');
       clearCart(); // Clear cart after successful checkout
       // Reset form fields after successful checkout

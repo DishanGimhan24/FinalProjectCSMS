@@ -14,7 +14,7 @@ export default function AllInventory() {
     }, []);
 
     const fetchInventory = () => {
-        axios.get('http://localhost:8091/inventory/list')
+        axios.get('http://localhost:8070/inventory/list')
             .then(res => {
                 setInventory(res.data);
             })

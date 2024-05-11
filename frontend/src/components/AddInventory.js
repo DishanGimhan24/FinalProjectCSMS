@@ -12,7 +12,7 @@ const AddInventory = () => {
 
         try {
             const newItem = { itemName, quantity, category, price };
-            await axios.post('http://localhost:8091/inventory/add', newItem);
+            await axios.post('http://localhost:8070/inventory/add', newItem);
             alert('Item added successfully!');
             // Clear input fields after successful addition
             setItemName("");
