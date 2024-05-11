@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,12 @@ export default function AddPaymentDetails() {
     const [paymentType, setPaymentType] = useState("");
     const [amount, setAmount] = useState("");
     const [paymentDescription, setPaymentDescription] = useState("");
+
+    useEffect(() => {
+        // Auto-fill the current date when the component mounts
+        const currentDate = new Date().toISOString().split('T')[0];
+        setDate(currentDate);
+    }, []);
 
     function isDateValid(inputDate) {
         const currentDate = new Date();

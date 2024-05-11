@@ -12,6 +12,12 @@ export default function AddReports() {
         setDocument(e.target.files[0]); // Set the selected file
     };
 
+    useEffect(() => {
+        // Auto-fill the current date when the component mounts
+        const currentDate = new Date().toISOString().split('T')[0];
+        setDate(currentDate);
+    }, []);
+
     // Function to validate the date
     function isDateValid(inputDate) {
         const currentDate = new Date();
@@ -21,7 +27,7 @@ export default function AddReports() {
 
     // Function to handle form submission
     // Function to handle form submission
-const sendData = async (e) => {
+    const sendData = async (e) => {
     e.preventDefault();
     
     if (!isDateValid(date)) {
@@ -43,9 +49,13 @@ const sendData = async (e) => {
         console.log('Server Response:', response.data);
         alert('Payment Report Added Successfully');
 
+
+        /*
         // Download the added payment report
-        const reportId = response.data.reportId; // Assuming the response contains the new report's ID
+        const reportId = response.data.reportId; 
         window.open(`http://localhost:8070/reports/download/${reportId}`, "_blank", "noreferrer");
+        */
+
     } catch (error) {
         // Logging the complete error object for detailed information
         console.error('Error:', error);
@@ -96,17 +106,20 @@ const sendData = async (e) => {
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Document Upload</label>
-                        <input
-                            type="file"
-                            className="form-control-file"
-                            onChange={handleFileChange}
-                            accept="application/pdf"
-                        />
+                    <hr />
+
+                    <div className="mb-3">
+                    <label for="formFile" class="form-label">Document Upload</label>
+                    <input
+                        type="file" 
+                        className="form-control" 
+                        onChange={handleFileChange}
+                        accept="application/pdf"
+                    />
                     </div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btn btn-outline-success">Submit</button>
+
+                    <div className="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" className="btn btn-outline-success">Submit</button>
                     </div>
                 </form>
 

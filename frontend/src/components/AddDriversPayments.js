@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -17,6 +17,12 @@ export default function AddDriversPayments() {
         const re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
+
+    useEffect(() => {
+        // Auto-fill the current date when the component mounts
+        const currentDate = new Date().toISOString().split('T')[0];
+        setDate(currentDate);
+    }, []);
 
     // Dste validation
     function isDateValid(inputDate) {
