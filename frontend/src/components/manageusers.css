@@ -11,7 +11,7 @@
   .user-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 400px;
+    margin-top: 800px;
   }
   
   /* Style table headers */
@@ -20,6 +20,7 @@
     color: #fff;
     padding: 10px;
     text-align: left;
+    
   }
   
   /* Style table rows */

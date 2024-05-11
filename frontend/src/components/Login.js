@@ -34,12 +34,12 @@ export default function Login() {
           alert("Login successful");
           navigate(`/get/${response.data.userId}`);
         } else {
-          setLoginError("Invalid email or password"); 
+          setLoginError(response.data.message);  // Use the server's error message
         }
       })
       .catch((err) => {
-        console.error('Error:', err);  // Log any errors
-        alert(err);
+        console.error('Error:', err.response.data);  // Log the server's response
+        alert(err.message);
       });
   }
   

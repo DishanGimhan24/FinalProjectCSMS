@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AddCustomer.css";
 import Navbar from "./Navbar";
 
 export default function AddCustomer() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [address, setAddress] = useState("");
@@ -24,6 +26,19 @@ export default function AddCustomer() {
   function sendData(e) {
     e.preventDefault();
 
+    // Validate age
+    if (parseInt(age) <= 20) {
+      alert("Age must be greater than 20");
+      return; // Stop execution if age is not valid
+    }
+
+    // Validate password
+    if (password.length <= 6) {
+      alert("Password must be greater than 6 characters");
+      return; // Stop execution if password is not valid
+    }
+
+    // Proceed with form submission if validations pass
     const formData = new FormData();
     formData.append("name", name);
     formData.append("age", age);
@@ -35,17 +50,19 @@ export default function AddCustomer() {
     formData.append("profileImage", profileImage);
 
     axios
-      .post("http://localhost:8070/Customer/add", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then(() => {
-        alert("Customer Added");
-      })
-      .catch((err) => {
-        alert(err);
-      });
+    .post("http://localhost:8070/Customer/add", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then(() => {
+      alert("Customer Added");
+      navigate("/home"); // Redirect to Home page
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  
 
     console.log("Form submitted");
     alert("Form submitted");

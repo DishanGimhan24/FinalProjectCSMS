@@ -53,7 +53,6 @@ router.route("/add").post(upload.single("profileImage"), (req, res) => {
 
 // Other routes and code...
 
-
 router.route("/").get((req, res) => {
   Customer.find()
     .then((customers) => {
@@ -128,15 +127,15 @@ router.route("/get/:id").get(async (req, res) => {
 router.route("/login").post(async (req, res) => {
   const { address, password } = req.body;
 
-  try {
+  try { 
     const customer = await Customer.findOne({ address });
 
     if (!customer) {
-      return res.status(400).json({ status: "error", message: "Invalid email or password" });
+      return res.status(400).json({ status: "error", message: "Invalid email address" });
     }
 
-    if (customer.Password !== password) {
-      return res.status(400).json({ status: "error", message: "Invalid email or password" });
+    if (customer.password !== password) {
+      return res.status(400).json({ status: "error", message: "Incorrect password" });
     }
 
     // Include the userId in the response
@@ -146,8 +145,6 @@ router.route("/login").post(async (req, res) => {
     res.status(500).send({ status: "Error with login", error: err.message });
   }
 });
-
-
 
 
 module.exports = router;
