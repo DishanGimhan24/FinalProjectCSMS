@@ -48,7 +48,7 @@ const Navbar = () => {
         <img src={Logo} alt="" style={{ width: "150px", height: "auto" }} />
       </div>
       <div className="navbar-links-container" style={{ display: "flex", gap: "50px" }}>
-        <a href="" style={{ fontSize: "14px",color:"#F1F3F4" }}>Home</a>
+        <a href="/RealHome" style={{ fontSize: "14px",color:"#F1F3F4" }}>Home</a>
         <a href="" style={{ fontSize: "14px",color:"#F1F3F4" }}>Adverisements</a>
         <a href="" style={{ fontSize: "14px",color:"#F1F3F4" }}>Package</a>
         <a href="" style={{ fontSize: "14px",color:"#F1F3F4" }}>Inventory</a>

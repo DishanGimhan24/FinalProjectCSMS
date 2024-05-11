@@ -21,11 +21,10 @@ const Home = () => {
         <div className="home-text-image-container fade-in-left">
           <div className="home-text-section">
             <h1 className="primary-heading">
-              Your Favourite Food Delivered Hot & Fresh
+              Deepthi Travells
             </h1>
             <p className="primary-text">
-              Healthy switcher chefs do all the prep work, like peeling, chopping
-              & marinating, so you can cook fresh food.
+             This is Deepthi Travells.Your best companion for the rest of your journey
             </p>
             <button className="secondary-button">
               Order Now <FiArrowRight />{" "}
