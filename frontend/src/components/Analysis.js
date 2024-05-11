@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
 import './Analysis.css'; // Import the Analysis.css file
+import AdminHeader from './AdminHeader';
 
 const Analysis = () => {
     const [dailyRides, setDailyRides] = useState([]);
@@ -38,8 +39,9 @@ const Analysis = () => {
     }, []);
 
     return (
-        <div className="analysis-container">
-            <h1 className="analysis-heading"><t/> System Performance Analysis <t/></h1>
+
+        <><AdminHeader /><div className="analysis-container">
+            <h1 className="analysis-heading"><t /> System Performance Analysis <t /></h1>
 
             <div className="chart-container">
                 <h2 className="chart-heading">Daily Rides</h2>
@@ -82,7 +84,7 @@ const Analysis = () => {
                     </BarChart>
                 </div>
             </div>
-        </div>
+        </div></>
     );
 };
 

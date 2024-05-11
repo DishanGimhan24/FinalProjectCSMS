@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AdminHeader from "./AdminHeader";
 import { Link } from "react-router-dom";
-import './Login.css'; // Import the Login.css file
+import './AdminLogin.css'; // Import the Login.css file
 
 export default function AddSalary() {
     const [Emp_ID, setEmp_ID] = useState("");
@@ -59,27 +60,27 @@ export default function AddSalary() {
     }
 
     return (
-        <div className="login-container-2">
-            <div style={{textAlign:"center"}}>
-            <h3>Add Employee Salary</h3>
-            <br/>
+        <><AdminHeader /><div className="login-container-2">
+            <div style={{ textAlign: "center" }}>
+                <h3>Add Employee Salary</h3>
+                <br />
             </div>
             <div className="container">
                 <form onSubmit={sendData} className="login-form">
                     <div className="form-group">
                         <label htmlFor="Emp_ID">Employee ID</label>
-                        <input type="text" className="form-control" id="Emp_ID" placeholder="Enter Employee ID" required onChange={(e) => { setEmp_ID(e.target.value); }}/>
+                        <input type="text" className="form-control" id="Emp_ID" placeholder="Enter Employee ID" required onChange={(e) => { setEmp_ID(e.target.value); } } />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="Date">Date</label>
                         <input type="date" className="form-control" id="Date" value={selectedDate} readOnly /> {/* Changed to selectedDate */}
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="Month">Month</label>
-                        <select className="form-select" aria-label="Default select example" onClick={(e) => { setMonth(e.target.value); }} required >
-                            <option disabled selected style={{color: "#999"}}>Select month</option>
+                        <select className="form-select" aria-label="Default select example" onClick={(e) => { setMonth(e.target.value); } } required>
+                            <option disabled selected style={{ color: "#999" }}>Select month</option>
                             <option value="January">January</option>
                             <option value="February">February</option>
                             <option value="March">March</option>
@@ -94,24 +95,24 @@ export default function AddSalary() {
                             <option value="December">December</option>
                         </select>
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="Worked_Days">Employee Worked Days</label>
-                        <input type="number" className="form-control" id="Worked_Days" placeholder="Enter the number of worked days'" required value={Worked_Days} onChange={handleWorkedDaysChange}/>
+                        <input type="number" className="form-control" id="Worked_Days" placeholder="Enter the number of worked days'" required value={Worked_Days} onChange={handleWorkedDaysChange} />
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="Basic_Salary">Employee Basic Salary (per day)</label>
                         <input type="number" className="form-control" id="Basic_Salary" required placeholder="Enter the basic salary per a day to this employee" value={Basic_Salary} onChange={handleBasicSalaryChange} />
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="Final_Salary">Employee Final Salary</label>
                         <input type="number" className="form-control" id="Final_Salary" required value={Final_Salary} readOnly />
                     </div>
-                    
-                    
-                    <div className="form-group" style={{textAlign:"center"}}>
+
+
+                    <div className="form-group" style={{ textAlign: "center" }}>
                         <button type="submit" className="btn btn-primary">
                             Add Employee Salary
                         </button>
@@ -119,6 +120,6 @@ export default function AddSalary() {
 
                 </form>
             </div>
-        </div>
+        </div></>
     );
 }

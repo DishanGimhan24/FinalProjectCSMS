@@ -4,6 +4,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import _ from 'lodash';
 import './SystemUsersTable.css';
+import AdminHeader from './AdminHeader';
+
 
 const AllSalaries = () => {
     const [salary, setSalary] = useState([]);
@@ -94,7 +96,7 @@ const AllSalaries = () => {
         const filteredSalary = _.filter(salary, (user) => user.Emp_ID.toLowerCase().includes(searchQuery.toLowerCase()));
     
     return (
-        <>
+        <><AdminHeader/>
             <div className="search-bar">
                 <input style={{ marginTop: "5vh", marginLeft: "5vw", width: "15vw" }}
                     type="text"

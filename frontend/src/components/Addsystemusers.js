@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import './Login.css'; 
+import './AdminLogin.css'; 
+import AdminHeader from "./AdminHeader";
 
 export default function AddSystemUsers() {
     const [Emp_ID, setEmp_ID] = useState("");
@@ -63,41 +63,41 @@ export default function AddSystemUsers() {
     }
 
     return (
-        <div className="login-container-2">
-            <div style={{textAlign:"center"}}>
-            <h3>Add New System User</h3>
+        <><AdminHeader /><div className="login-container-2">
+            <div style={{ textAlign: "center" }}>
+                <h3>Add New System User</h3>
             </div>
             <div className="container">
                 <form onSubmit={sendData} className="login-form">
                     <div className="form-group">
                         <label htmlFor="Emp_ID">Employee ID</label>
-                        <input type="text" className="form-control" id="Emp_ID" placeholder="Enter Employee ID" required onChange={(e) => { setEmp_ID(e.target.value); }}/>
+                        <input type="text" className="form-control" id="Emp_ID" placeholder="Enter Employee ID" required onChange={(e) => { setEmp_ID(e.target.value); } } />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="name">Employee Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="Enter Employee Name" required onChange={(e) => { setname(e.target.value); }}/> 
+                        <input type="text" className="form-control" id="name" placeholder="Enter Employee Name" required onChange={(e) => { setname(e.target.value); } } />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password">Employee Password</label>
-                        <input type="password" className="form-control" id="password" placeholder="Enter Employee Password, 'Use Strong Password'" required onChange={(e) => { setpassword(e.target.value); }}/>
+                        <input type="password" className="form-control" id="password" placeholder="Enter Employee Password, 'Use Strong Password'" required onChange={(e) => { setpassword(e.target.value); } } />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="phone_number">Employee Phone Number</label>
-                        <input type="tel" className="form-control" id="phone_number" value={phone_number} onChange={handlePhoneNumberChange} pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required placeholder="Enter Phone number 'Only 10 numbers'"/>
+                        <input type="tel" className="form-control" id="phone_number" value={phone_number} onChange={handlePhoneNumberChange} pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required placeholder="Enter Phone number 'Only 10 numbers'" />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="address">Employee Address</label>
-                        <input type="text" className="form-control" id="address" placeholder="Enter Employee Permanent Address'" required onChange={(e) => { setaddress(e.target.value); }}/>
+                        <input type="text" className="form-control" id="address" placeholder="Enter Employee Permanent Address'" required onChange={(e) => { setaddress(e.target.value); } } />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="Emp_Type">Employee Type</label>
-                        <select className="form-select" aria-label="Default select example" onClick={(e) => { setEmp_Type(e.target.value); }} required >
-                            <option disabled selected style={{color: "#999"}}>Select user role</option>
+                        <select className="form-select" aria-label="Default select example" onClick={(e) => { setEmp_Type(e.target.value); } } required>
+                            <option disabled selected style={{ color: "#999" }}>Select user role</option>
                             <option value="Payment_Manager">Payment Manager</option>
                             <option value="Administrator">Administrator</option>
                             <option value="Inquiry_Manager">Inquiry Manager</option>
@@ -109,7 +109,7 @@ export default function AddSystemUsers() {
                         </select>
                     </div>
 
-                    <div className="form-group" style={{textAlign:"center"}}>
+                    <div className="form-group" style={{ textAlign: "center" }}>
                         <button type="submit" className="btn btn-primary">
                             Add System User
                         </button>
@@ -117,6 +117,6 @@ export default function AddSystemUsers() {
 
                 </form>
             </div>
-        </div>
+        </div></>
     );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from './logo.jpg';
 
-function Header() {
+function AdminHeader() {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
 
     const handleLogout = () => {
@@ -62,4 +62,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default AdminHeader;

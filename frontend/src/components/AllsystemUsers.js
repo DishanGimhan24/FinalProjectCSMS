@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import _ from 'lodash'; // Import lodash
 import './SystemUsersTable.css';
+import AdminHeader from './AdminHeader';
 
 const AllsystemUsers = () => {
     const [systemUsers, setSystemUsers] = useState([]);
@@ -102,7 +103,9 @@ const AllsystemUsers = () => {
     const filteredUsers = _.filter(systemUsers, (user) => user.Emp_ID.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return (
-        <><div>
+        <><AdminHeader/>
+        
+        <div>
             <input style={{marginTop:"5vh",marginLeft:"5vw",width:"15vw"}}
                 type="text"
                 placeholder="Search by ID..."

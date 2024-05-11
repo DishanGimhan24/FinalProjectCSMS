@@ -1,9 +1,12 @@
 import React from "react";
 import "./AdminHome.css"; // Import the CSS file for styling
 import { Link } from "react-router-dom";
+import AdminHeader from "./AdminHeader";
+
 
 const AdminHome = () => {
     return (
+        <><AdminHeader />
         <div className="admin-home">
             <div className="content">
                 <div className="welcome-section">
@@ -36,7 +39,7 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div></>
     );
 };
 
