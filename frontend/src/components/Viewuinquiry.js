@@ -52,17 +52,18 @@ export default function ViewInquiries() {
     axios.put(`http://localhost:8070/inquiry/update/${editId}`, { personemail: editedEmail })
       .then(response => {
         console.log(response.data);
+        // Update the email in the local state immediately after successful update
+        setInquiries(prevInquiries => {
+          return prevInquiries.map(inquiry => {
+            if (inquiry._id === editId) {
+              return { ...inquiry, personemail: editedEmail };
+            }
+            return inquiry;
+          });
+        });
         // Reset editId and editedEmail states after successful update
         setEditId(null);
         setEditedEmail("");
-        // Refresh inquiries list
-        axios.get("http://localhost:8070/inquiry/")
-          .then(response => {
-            setInquiries(response.data);
-          })
-          .catch(error => {
-            console.error('Error fetching inquiries: ', error);
-          });
       })
       .catch(error => {
         console.error('Error updating email: ', error);

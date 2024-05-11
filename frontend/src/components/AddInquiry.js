@@ -11,6 +11,8 @@ export default function AddInquiry() {
   const [personinquiry, setPersonInquiry] = useState("");  
   const [inquiryLengthError, setInquiryLengthError] = useState(""); // State to store inquiry length validation error
   const [phoneNumberError, setPhoneNumberError] = useState(""); // State to store phone number validation error
+  const [categoryWarning, setCategoryWarning] = useState(""); // State to store category warning message
+  const [prioritizationWarning, setPrioritizationWarning] = useState(""); // State to store prioritization warning message
 
   function sendData(e) {
     e.preventDefault();
@@ -22,12 +24,26 @@ export default function AddInquiry() {
       return;
     }
 
+    // Check if category is selected
+    if (!inquirycategory) {
+      setCategoryWarning("Please select an inquiry category.");
+      return;
+    } else {
+      setCategoryWarning(""); // Clear category warning if category is selected
+    }
+
+    if (!inquiryprioritization) {
+      setPrioritizationWarning("Please select an inquiry prioritization.");
+      return;
+    } else {
+      setPrioritizationWarning(""); // Clear prioritization warning if prioritization is selected
+    }
 
     // Inquiry length validation
-  if (personinquiry.split(/\s+/).length > 100) {
-    setInquiryLengthError("Inquiry should contain maximum 100 words.");
-    return;
-  }
+    if (personinquiry.split(/\s+/).length > 100) {
+      setInquiryLengthError("Inquiry should contain maximum 100 words.");
+      return;
+    }
 
     const newInquiry = {
       inquirycategory,
@@ -101,6 +117,7 @@ export default function AddInquiry() {
             <label htmlFor="complaints" className="form-check-label">Complaints</label>
           </div>
         </div>
+        {categoryWarning && <div className="text-warning">{categoryWarning}</div>}
         <div className="mb-3">
           <label className="form-label">Inquiry Prioritization:</label>
           <div className="form-check form-check-inline">
@@ -140,6 +157,7 @@ export default function AddInquiry() {
             <label htmlFor="normal" className="form-check-label">Normal</label>
           </div>
         </div>
+        {prioritizationWarning && <div className="text-warning">{prioritizationWarning}</div>}
         <div className="mb-3">
           <label htmlFor="personEmail" className="form-label">Person Email</label>
           <input
@@ -164,18 +182,17 @@ export default function AddInquiry() {
           {phoneNumberError && <div className="text-danger">{phoneNumberError}</div>}
         </div>
         <div className="mb-3">
-  <label htmlFor="personInquiry" className="form-label">Person Inquiry</label>
-  <textarea
-    className="form-control"
-    id="personInquiry"
-    rows="3"
-    placeholder="Enter Person Inquiry (Maximum 100 words)"
-    value={personinquiry}
-    onChange={(e) => setPersonInquiry(e.target.value)}
-  ></textarea>
-  {inquiryLengthError && <div className="text-danger">{inquiryLengthError}</div>}
-</div>
-
+          <label htmlFor="personInquiry" className="form-label">Person Inquiry</label>
+          <textarea
+            className="form-control"
+            id="personInquiry"
+            rows="3"
+            placeholder="Enter Person Inquiry (Maximum 100 words)"
+            value={personinquiry}
+            onChange={(e) => setPersonInquiry(e.target.value)}
+          ></textarea>
+          {inquiryLengthError && <div className="text-danger">{inquiryLengthError}</div>}
+        </div>
         <button type="submit" className="btn btn-primary">Submit</button>
         <Link to="/view-inquiries" className="btn btn-secondary ml-2">View Inquiries</Link>
       </form>
