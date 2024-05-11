@@ -30,6 +30,13 @@ connection.once("open", () => {
 })
 
 const systemuserRouter = require("./routes/systemusers.js");
+const inquiryRouter = require("./routes/inquiries.js");
+
+http://localhost:8070/inquiry
+
+app.use("/inquiry",inquiryRouter);
+const paymentdetailsRouter = require("./routes/paymentdetails");
+app.use("/paymentdetails",paymentdetailsRouter);
 
 app.use("/systemusers",systemuserRouter);
 
@@ -43,3 +50,7 @@ app.listen(PORT, () => {
 
     console.log(`Server is up and running on port number : ${PORT}`)
 })
+
+
+
+
