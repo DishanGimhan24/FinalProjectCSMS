@@ -12,7 +12,7 @@ import ManagerDelete from './components/ManagerDelete';
 import ManagerUpdate from './components/ManagerUpdate';
 import HomePage from './components/HomePage';
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddCustomer from "./components/AddCustomer";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
@@ -38,7 +38,7 @@ import ImageGallery from './components/ImageGallery';
 
 //payments
 import AddPaymentDetails from './components/AddPaymentDetails';
-import Header from './components/Header';
+// import Header from './components/Header';
 import Payments from './components/Payments';
 import AllPaymentDetails from './components/AllPaymentDetails';
 //import UpdatePaymentDetails from './components/UpdatePaymentDetails';
