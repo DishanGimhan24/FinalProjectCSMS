@@ -109,14 +109,14 @@ tbody tr td img {
     font-size: 14px;
 }
 
-.submit-btn {
+.down-btn {
     display: flex;
     /* justify-content: center; */
     /* align-items: center; */
     height: 100%;
 }
 
-.submit-btn button {
+.down-btn button {
     background-color: #333336;
     width: 200px; /* Adjust width as needed */
     height: 40px;
@@ -128,7 +128,7 @@ tbody tr td img {
     transition: transform 0.3s, box-shadow 0.3s; 
 }
 
-.submit-btn button:hover {
+.down-btn button:hover {
     background: #02363f;
     color: #c4bfbf;
     transform: translateY(1px); 

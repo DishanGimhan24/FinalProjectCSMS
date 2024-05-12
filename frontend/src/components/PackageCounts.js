@@ -58,7 +58,7 @@ const PackageCounts = () => {
 
                 <div className="title">Package Counts</div>
                 <div className="table__header">   
-                <div className="submit-btn">
+                <div className="down-btn">
                     <button type="submit" className="btn btn-primary" onClick={downloadPdf}>Download as PDF</button>
                 </div>
                 </div>
