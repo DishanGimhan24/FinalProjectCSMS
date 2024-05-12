@@ -3,6 +3,7 @@ import axios from "axios";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.jpg"; // Ensure this path is correct
+import Navbar from "./uadminnavbar";
 import "./manageusers.css";
 
 export default function ManageUsers() {
@@ -55,7 +56,10 @@ export default function ManageUsers() {
   const { totalCustomers, totalDrivers, customerPercentage, driverPercentage, ageCategories } = calculateStatistics();
 
   return (
+    
     <div className="center-container">
+      <Navbar />
+      
       {/* Logo */}
       <img src={logo} alt="Logo" className="logo-img" />
 
