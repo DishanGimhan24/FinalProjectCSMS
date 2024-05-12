@@ -89,8 +89,17 @@ const CabTable = () => {
                                     <td>
                                         {editedCab === cab._id ? (
                                                 <>
-                                                    <button onClick={() => saveEdit(cab._id, { packageName: document.querySelector(`input[data-id="${cab._id}-packageName"]`).value, description: document.querySelector(`input[data-id="${cab._id}-description"]`).value, price: document.querySelector(`input[data-id="${cab._id}-price"]`).value, timePeriod: document.querySelector(`input[data-id="${cab._id}-timePeriod"]`).value })}>Save</button>
-                                                    <button onClick={cancelEdit}>Cancel</button>
+                                                   
+                                                   <div style={{ marginBottom: '10px' }}>
+                                                        <button onClick={() => saveEdit(cab._id, { packageName: document.querySelector(`input[data-id="${cab._id}-packageName"]`).value, description: document.querySelector(`input[data-id="${cab._id}-description"]`).value, price: document.querySelector(`input[data-id="${cab._id}-price"]`).value, timePeriod: document.querySelector(`input[data-id="${cab._id}-timePeriod"]`).value })} style={{ backgroundColor: 'green', color: 'white', border: 'none' }}>Save</button>
+                                                    </div>
+                                                    <div>
+                                                        <button onClick={cancelEdit} style={{ backgroundColor: 'red', color: 'white', border: 'none' }}>Cancel</button>
+                                                    </div>
+
+
+
+
                                                 </>
                                             ) : (
                                                 <div className="submit-btn">
