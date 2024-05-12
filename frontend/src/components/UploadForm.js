@@ -1,19 +1,18 @@
-import { useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useLocation } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import "./Css/upload.css";
 
 const UploadForm = () => {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState("");
     const [showModal, setShowModal] = useState(false);
 
-    const navigate = useNavigate();
     const { id } = useParams();
     const location = useLocation();
-    
+
     const selectedPackage = location.state ? location.state.selectedPackage : null;
 
     if (!selectedPackage) {
@@ -26,7 +25,6 @@ const UploadForm = () => {
         formData.append("file", file);
 
         try {
-            console.log("cab id " + selectedPackage._id);
             await axios.post(`http://localhost:8070/uploads/fileUpload/${selectedPackage._id}`, formData);
             setUploadStatus("File uploaded successfully!");
             setShowModal(true); // Open the modal on success
@@ -37,13 +35,20 @@ const UploadForm = () => {
     };
 
     return (
-        <div className="container">
-            <h3>Selected Package Details:</h3>
-            <p><strong>Package Name:</strong> {selectedPackage.packageName}</p>
-            <p><strong>Price:</strong> {selectedPackage.price}</p>
-            <p><strong>Time Period:</strong> {selectedPackage.timePeriod}</p>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-            <button onClick={upload}>Upload</button>
+        <div className="container" style={{ marginTop: '40px' }}>
+            <h3 className="form-title">Selected Package Details:</h3>
+            <div className="main-user-info">
+                <p><strong>Package Name:</strong> {selectedPackage.packageName}</p>
+                <p><strong>Price:</strong> {selectedPackage.price}</p>
+                <p><strong>Time Period:</strong> {selectedPackage.timePeriod}</p>
+            </div>
+            <div className="user-input-box">
+                <label htmlFor="file">Select Image:</label>
+                <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
+            </div>
+            <div className="form-submit-btn">
+                <button onClick={upload}>Upload</button>
+            </div>
             {uploadStatus && <p>{uploadStatus}</p>}
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
