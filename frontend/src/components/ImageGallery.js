@@ -1,83 +1,95 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './ImageGallery.css';
 
-const ImageGallery = () => {
-    const [images, setImages] = useState([]);
-    const [approvedImages, setApprovedImages] = useState({}); // Track approved images by index
-    const navigate = useNavigate();
+const CabGallery = () => {
+  const [cabs, setCabs] = useState([]);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        axios.get("http://localhost:8070/cab")
-            .then(response => {
-                setImages(response.data); 
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+  // Fetch the cab data on component mount
+  useEffect(() => {
+    const fetchCabs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8070/uploads/cabs');
+        if (response.data.success) {
+          setCabs(response.data.cabs);
+        } else {
+          setError(response.data.message || 'Failed to load cabs.');
+        }
+      } catch (err) {
+        setError('An error occurred while fetching cabs.');
+      }
+    };
 
-    useEffect(() => {
-        const fetchImages = async () => {
-            try {
-                const response = await axios.get('http://localhost:8070/uploads/getAllImages');
-                console.log('Response from server:', response.data);
-                setImages(response.data);
-            } catch (error) {
-                console.error('Error fetching images:', error);
+    fetchCabs();
+  }, []);
+
+  // Handle image deletion
+  const handleDelete = async (cabId, filePath) => {
+    try {
+      const response = await axios.delete(`http://localhost:8070/uploads/fileUpload/${cabId}`, {
+        data: { filePath }, // Send filePath in the request body
+      });
+
+      if (response.data.success) {
+        setCabs((prevCabs) => {
+          // Remove the deleted image from the state
+          return prevCabs.map((cab) => {
+            if (cab.id === cabId) {
+              return {
+                ...cab,
+                images: cab.images.filter((image) => image.fileName !== filePath.split('/').pop()),
+              };
             }
-        };
+            return cab;
+          });
+        });
+      } else {
+        setError(response.data.message);
+      }
+    } catch (err) {
+      setError('An error occurred while deleting the image.');
+    }
+  };
 
-        fetchImages();
-    }, []);
-
-    const handleDownload = (url) => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'image';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
-    const handleApprove = (index, packageName) => {
-        const newApprovedImages = { ...approvedImages };
-        newApprovedImages[index] = {
-            approved: true,
-            timestamp: new Date().toLocaleString() // Add the current date and time
-        }; 
-        setApprovedImages(newApprovedImages);
-
-        axios.post("http://localhost:8070/cab/select", { packageName })
-            .then(response => console.log(response.data.message))
-            .catch(error => console.error('Error selecting package:', error));
-    };
-
-    return (
-        <div className="image-gallery">
-            {images.length === 0 ? (
-                <p>No images available</p>
-            ) : (
-                images.map((image, index) => (
-                    <div key={index} className="card">
-                        <div className="card-image">
-                            <img src={image.url} alt={`Image ${index}`} className="content-image" />
-                            {approvedImages[index] && <span className="approved-icon">✔</span>}
-                        </div>
-                        <div className="card-details">
-                            <h3>{image.packageName}</h3>
-                            <p>{image.description}</p>
-                        </div>
-                        <div className="button-group">
-                            <button onClick={() => handleDownload(image.url)} className="download-button">Download</button>
-                            <button onClick={() => handleApprove(index, image.packageName)} className="approve-button">Approve</button>
-                        </div>
-                    </div>
-                ))
-            )}
-        </div>
-    );
+  return (
+    <div className="container mt-6">
+      <h2>Cab Gallery</h2>
+      {error && <p className="text-danger">{error}</p>}
+      <div className="row">
+        {cabs.length > 0 ? (
+          cabs.map((cab) => (
+            <div key={cab.id} className="col-md-6 mb-6">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Cab ID: {cab.id}</h5>
+                  <div>
+                    {cab.images.map((image) => (
+                      <div key={image.fileName} className="mb-3">
+                        <img
+                          src={image.url}
+                          alt={image.fileName}
+                          className="img-fluid"
+                        />
+                        <p>{image.fileName}</p>
+                        <button
+                          onClick={() => handleDelete(cab.id, image.fileName)}
+                          className="btn btn-danger"
+                        >
+                          Delete Image
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No cabs available.</p>
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default ImageGallery;
+export default CabGallery;
