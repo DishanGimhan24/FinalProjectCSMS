@@ -147,38 +147,33 @@ router.delete('/fileUpload/:id', async (req, res) => {
 });
 
 
-
-// PATCH route to toggle the approval status
-router.patch('/approve/:id', async (req, res) => {
+// Toggle approval status
+router.patch('/toggle/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-
-    // Find the cab by ID
-    const cab = await Cab.findById(id);
-
+    const cab = await Cab.findById(req.params.id);
     if (!cab) {
-      return res.status(404).json({ message: 'Cab not found' });
+      return res.status(404).json({
+        success: false,
+        message: 'Cab not found'
+      });
     }
 
-    // Log the current approval status before toggling
-   // console.log(`Before: Cab ID: ${id}, Approved: ${cab.approved}`);
-
-    // Toggle the approved field
+    // Toggle the approval status
     cab.approved = !cab.approved;
+    const updatedCab = await cab.save();
 
-    // Save the updated cab document
-    await cab.save();
+    return res.json({
+      success: true,
+      cab: updatedCab, // Include the updated cab in the response
+    });
 
-    // Log the updated approval status after saving
-    console.log(`After: Cab ID: ${id}, Approved: ${cab.approved}`);
-
-    // Return the updated cab in the response
-    res.status(200).json(cab);
-  } catch (error) {
-    console.error('Error toggling approval:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+  } catch (err) {
+    return res.status(400).json({ success: false, message: err.message });
   }
 });
+
+
+
 
 module.exports = router;
 
